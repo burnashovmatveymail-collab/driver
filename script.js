@@ -55,7 +55,6 @@ function initGoogleAuth() {
         },
     });
 
-    // Авто-вход, если сессия сохранена
     if (accessToken) {
         showDashboard();
     }
@@ -70,7 +69,6 @@ window.onload = () => {
     setLanguage(currentLang);
     setTimeout(initGoogleAuth, 500);
 
-    // Переключение языка
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.onclick = (e) => setLanguage(e.target.getAttribute('data-lang'));
     });
@@ -89,7 +87,6 @@ document.getElementById('logout-btn').onclick = () => {
     document.getElementById('dashboard').style.display = 'none';
 };
 
-// Заглушки для кнопок управления
 document.getElementById('create-notebook-btn').onclick = () => {
     alert(currentLang === 'ru' ? 'Функция создания тетради в разработке' : 'Notebook creation coming soon');
 };
