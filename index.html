@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<title>Flight Simulator</title>
-<style>
-body {
-    margin: 0;
-    overflow: hidden;
-    background-color: #000;
-}
-canvas {
-    display: block;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Flight Simulator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
+    <div id="hud">
+        <div>Тяга (W/S): <span id="throttle">0</span>%</div>
+        <div>Скорость: <span id="speed">0</span> km/h</div>
+        <div>Высота: <span id="alt">0</span> m</div>
+        <div>Кликните по экрану для включения управления мышью</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
