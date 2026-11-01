@@ -2,17 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Flight Simulator</title>
+    <title>Flight Simulator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="hud">
-        <div>Тяга (W/S): <span id="throttle">0</span>%</div>
-        <div>Скорость: <span id="speed">0</span> km/h</div>
-        <div>Высота: <span id="alt">0</span> m</div>
-        <div>Кликните по экрану для включения управления мышью</div>
+    <div id="hud-overlay"></div>
+    <div id="info">
+        Тяга: <span id="throttle">0</span>%<br>
+        Скорость: <span id="speed">0</span> km/h<br>
+        Высота: <span id="alt">0</span> m
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
