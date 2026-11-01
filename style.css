@@ -20,11 +20,11 @@ canvas {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 400px;
-    height: 400px;
+    width: 450px;
+    height: 450px;
     transform: translate(-50%, -50%);
     pointer-events: none;
-    border: 2px solid rgba(0, 255, 128, 0.4);
+    border: 2px solid rgba(0, 255, 128, 0.5);
     border-radius: 20px;
     box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);
 }
@@ -34,8 +34,8 @@ canvas {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     transform: translate(-50%, -50%);
     border: 2px solid #00ff80;
     border-radius: 50%;
@@ -46,10 +46,34 @@ canvas {
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 60px;
+    width: 80px;
     height: 2px;
     background: #00ff80;
     transform: translate(-50%, -50%);
+}
+
+#hud-alt-scale {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00ff80;
+    font-size: 14px;
+    text-align: right;
+    border-right: 2px solid #00ff80;
+    padding-right: 8px;
+}
+
+#hud-pitch-scale {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #00ff80;
+    font-size: 14px;
+    text-align: left;
+    border-left: 2px solid #00ff80;
+    padding-left: 8px;
 }
 
 #info {
