@@ -13,15 +13,29 @@ const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
 sunLight.position.set(500, 1000, 500);
 scene.add(sunLight);
 
+function createGridTexture() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 256;
+    canvas.height = 256;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#2d8a4e';
+    ctx.fillRect(0, 0, 256, 256);
+    ctx.strokeStyle = '#38a85e';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(canvas);
+}
+
+const groundTexture = createGridTexture();
+groundTexture.wrapS = THREE.RepeatWrapping;
+groundTexture.wrapT = THREE.RepeatWrapping;
+groundTexture.repeat.set(2000, 2000);
+
 const planeGeo = new THREE.PlaneGeometry(200000, 200000);
-const planeMat = new THREE.MeshLambertMaterial({ color: 0x2d8a4e });
+const planeMat = new THREE.MeshLambertMaterial({ map: groundTexture });
 const ground = new THREE.Mesh(planeGeo, planeMat);
 ground.rotation.x = -Math.PI / 2;
 scene.add(ground);
-
-const grid = new THREE.GridHelper(200000, 400, 0x1b5e20, 0x1b5e20);
-grid.position.y = 0.1;
-scene.add(grid);
 
 const airplane = new THREE.Group();
 scene.add(airplane);
@@ -52,6 +66,13 @@ const keys = {};
 
 window.addEventListener('keydown', (e) => {
     keys[e.key.toLowerCase()] = true;
+
+    if (e.key === 'ArrowUp') {
+        throttle = Math.min(100, throttle + 10);
+    }
+    if (e.key === 'ArrowDown') {
+        throttle = Math.max(0, throttle - 10);
+    }
 });
 
 window.addEventListener('keyup', (e) => {
@@ -70,8 +91,8 @@ window.addEventListener('mousemove', (e) => {
 });
 
 function update() {
-    if (keys['w']) throttle = Math.min(100, throttle + 1.0);
-    if (keys['s']) throttle = Math.max(0, throttle - 1.0);
+    if (keys['w']) throttle = Math.min(100, throttle + 0.5);
+    if (keys['s']) throttle = Math.max(0, throttle - 0.5);
 
     let leftBrake = keys['v'] ? 0.0 : 1.0;
     let rightBrake = keys['m'] ? 0.0 : 1.0;
@@ -83,7 +104,7 @@ function update() {
     const maxSpeed = 600;
     const targetSpeed = (throttle / 100) * maxSpeed;
     const brakeFactor = (leftBrake + rightBrake) / 2;
-    
+
     forwardSpeed += (targetSpeed * brakeFactor - forwardSpeed) * 0.05;
 
     const isGrounded = airplane.position.y <= 1.51;
@@ -116,12 +137,14 @@ function update() {
 
     ground.position.x = airplane.position.x;
     ground.position.z = airplane.position.z;
-    grid.position.x = airplane.position.x;
-    grid.position.z = airplane.position.z;
+
+    const pitchDegrees = Math.round((airplane.rotation.x * 180) / Math.PI);
+    const altitude = Math.round(airplane.position.y - 1.5);
 
     document.getElementById('throttle').textContent = Math.round(throttle);
     document.getElementById('speed').textContent = Math.round(forwardSpeed);
-    document.getElementById('alt').textContent = Math.round(airplane.position.y - 1.5);
+    document.getElementById('alt-val').textContent = altitude;
+    document.getElementById('pitch-val').textContent = pitchDegrees;
 }
 
 function animate() {
