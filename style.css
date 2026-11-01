@@ -16,15 +16,50 @@ canvas {
     height: 100vh;
 }
 
-#hud {
+#hud-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    height: 400px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border: 2px solid rgba(0, 255, 128, 0.4);
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 255, 128, 0.2);
+}
+
+#hud-overlay::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    transform: translate(-50%, -50%);
+    border: 2px solid #00ff80;
+    border-radius: 50%;
+}
+
+#hud-overlay::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 60px;
+    height: 2px;
+    background: #00ff80;
+    transform: translate(-50%, -50%);
+}
+
+#info {
     position: absolute;
     top: 20px;
     left: 20px;
-    color: #00ff00;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 15px;
-    border-radius: 5px;
+    color: #00ff80;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 12px;
+    border: 1px solid #00ff80;
+    font-size: 14px;
     pointer-events: none;
-    font-size: 16px;
-    line-height: 1.5;
 }
