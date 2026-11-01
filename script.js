@@ -6,7 +6,7 @@ const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
 scene.add(ambientLight);
 
 const sunLight = new THREE.DirectionalLight(0xffffff, 0.8);
@@ -15,23 +15,23 @@ scene.add(sunLight);
 
 function createGridTexture() {
     const canvas = document.createElement('canvas');
-    canvas.width = 256;
-    canvas.height = 256;
+    canvas.width = 128;
+    canvas.height = 128;
     const ctx = canvas.getContext('2d');
     ctx.fillStyle = '#2d8a4e';
-    ctx.fillRect(0, 0, 256, 256);
-    ctx.strokeStyle = '#38a85e';
+    ctx.fillRect(0, 0, 128, 128);
+    ctx.strokeStyle = '#1b5e20';
     ctx.lineWidth = 4;
-    ctx.strokeRect(0, 0, 256, 256);
+    ctx.strokeRect(0, 0, 128, 128);
     return new THREE.CanvasTexture(canvas);
 }
 
 const groundTexture = createGridTexture();
 groundTexture.wrapS = THREE.RepeatWrapping;
 groundTexture.wrapT = THREE.RepeatWrapping;
-groundTexture.repeat.set(2000, 2000);
+groundTexture.repeat.set(500, 500);
 
-const planeGeo = new THREE.PlaneGeometry(200000, 200000);
+const planeGeo = new THREE.PlaneGeometry(50000, 50000);
 const planeMat = new THREE.MeshLambertMaterial({ map: groundTexture });
 const ground = new THREE.Mesh(planeGeo, planeMat);
 ground.rotation.x = -Math.PI / 2;
@@ -54,7 +54,8 @@ airplane.add(wings);
 
 airplane.position.set(0, 1.5, 0);
 
-camera.position.set(0, 0.4, -0.1);
+camera.position.set(0, 0.4, 1.0);
+camera.rotation.y = Math.PI;
 airplane.add(camera);
 
 let throttle = 0;
